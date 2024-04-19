@@ -30,7 +30,6 @@ DROP TYPE tp_rel_registrada_estadias_nt;
 DROP TYPE tp_rel_registrada_estadias;
 DROP TYPE tp_rel_comprar_nt;
 DROP TYPE tp_rel_comprar;
-DROP TYPE tp_rel_comprar_nt;
 
 DROP TYPE tp_endereco;
 
@@ -110,9 +109,9 @@ CREATE OR REPLACE TYPE tp_voos AS OBJECT(
 -- ### Relacionamentos : Entidade associativa
 
 CREATE OR REPLACE TYPE tp_reserva AS OBJECT(
+    -- compra_id           REF  tp_rel_comprar,
     passageiro          REF  tp_passageiro,
     passagem            REF  tp_passagem,
-    -- compra_id           REF  tp_rel_comprar,
     data_compra         DATE,
     localizador         VARCHAR2(50),
     tipo_passageiro     CHAR
@@ -152,6 +151,7 @@ ALTER TYPE tp_hotel ADD ATTRIBUTE(
 CREATE OR REPLACE TYPE tp_rel_comprar AS OBJECT(
     estadia             REF tp_estadia,
     reserva             REF tp_reserva
+    -- criado_em           DATE
 );
 
 CREATE OR REPLACE TYPE tp_rel_comprar_nt AS TABLE OF tp_rel_comprar;
